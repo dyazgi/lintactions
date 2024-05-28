@@ -38,5 +38,4 @@ jobs:
         pwd
         ls -l
         pylint --recursive=y  . -f json2 --rcfile=.pylintrc > pylint_report.json
-        cat pylint_report.json
         python ./hooks/pylint_hook.py  --json-file pylint_report.json

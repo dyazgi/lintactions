@@ -70,8 +70,8 @@ git add . # again
 pre-commit run  # this will pass
 ```
 
-Not commit the code
+Now commit and push the code
 ```bash
 git commit -m "some message"
 ```
-you will that an action in github actions started to run please check the log
+you will see that an action in github actions started to run please check the log in Actions
