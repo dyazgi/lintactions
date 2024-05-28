@@ -33,12 +33,12 @@ jobs:
       continue-on-error: false
       run: |
         echo "starting this stage Pylint Stage"
-        #source venv/bin/activate
-        #pylint $(find . -name "*.py") --rcfile=.pylintrc -f json2 > pylint_report.txt
-        #cat pylint_report.txt | python  ./hooks/pylint_hook.py
-        #res=$?
-        #if [ $res == 0 ]; then
-        #    echo "All pylint scores are 10"
-        #    exit 0
-        #fi
-        #exit 1
+        source venv/bin/activate
+        pylint $(find . -name "*.py") --rcfile=.pylintrc -f json2 > pylint_report.txt
+        cat pylint_report.txt | python  ./hooks/pylint_hook.py
+        res=$?
+        if [ $res == 0 ]; then
+            echo "All pylint scores are 10"
+            exit 0
+        fi
+        exit 1
