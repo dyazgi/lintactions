@@ -33,6 +33,8 @@ def main():
         print(input_data)
         print(f"\033[91mPylint: Total score {score} is less than 10.\033[0m")
         sys.exit(1)
+    else:
+        print(f"\033[92mPylint: Total score {score}/10.\033[0m")
 
 if __name__ == "__main__":
     main()
