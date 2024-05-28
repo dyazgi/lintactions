@@ -2,12 +2,23 @@
 Author: Daniel Yazgi
 Date: 2024-05-28
 """
+
 import sys
 import json
+import argparse
 
 def main():
-    # Read JSON content from stdin
-    input_data = sys.stdin.read()
+
+    parser = argparse.ArgumentParser(description="Print colored messages.")
+    parser.add_argument('--json_file', dest="json_file" ,type=str, help='Input Json file if not it reads from stdin')
+    args = parser.parse_args()
+    if args.json_file:
+        with open(args.json_file, 'r', encoding="utf8") as file:
+            input_data = json.load(file)
+    else:
+        # Read JSON content from stdin
+        input_data = sys.stdin.read()
+
     score = 0
     try:
         # Parse JSON content
