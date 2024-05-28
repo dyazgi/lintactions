@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main  # Adjust this to the branch you want to protect
+  push:
+    branches:
+      - main
 
 jobs:
   pylint:
@@ -27,7 +30,7 @@ jobs:
 
     - name: Run pylint
       id: pylint
-      continue-on-error: true
+      continue-on-error: false
       run: |
         source venv/bin/activate
 
@@ -36,4 +39,6 @@ jobs:
         res=$?
         if [ $res == 0 ]; then
             echo "All pylint scores are 10"
+            exit 0
         fi
+        exit 1
