@@ -14,7 +14,7 @@ def main():
     args = parser.parse_args()
     if args.json_file:
         with open(args.json_file, 'r', encoding="utf8") as file:
-            input_data = json.load(file)
+            input_data = file.read()
     else:
         # Read JSON content from stdin
         input_data = sys.stdin.read()
