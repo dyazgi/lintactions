@@ -35,7 +35,7 @@ jobs:
         echo "starting this stage Pylint Stage"
         source venv/bin/activate
         pwd
-        ll
+        ls -l
         exit 0
        #pylint $(find . -name "*.py") --rcfile=.pylintrc -f json2 > pylint_report.txt
        #cat pylint_report.txt | python  ./hooks/pylint_hook.py
