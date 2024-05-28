@@ -38,5 +38,5 @@ jobs:
         pwd
         ls -l
         pylint --recursive=y  . -f json2 --rcfile=.pylintrc > pylint_report.txt
-        ./hooks/pylint_hook.py  --json-file pylint_report.txt
+        python ./hooks/pylint_hook.py  --json-file pylint_report.txt
         echo "All pylint scores are 10"
