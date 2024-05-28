@@ -1,0 +1,22 @@
+# Author: Daniel Yazgi
+# Date: 2024-05-28
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: check-yaml
+        stages: [commit]
+    -   id: end-of-file-fixer
+        stages: [commit]
+    -   id: trailing-whitespace
+        stages: [commit]
+-   repo: local
+    hooks:
+      - id: pylint-hook
+        name: pylint-hook
+        entry: ./hooks/pylint_hook.sh
+        language: script
+        types: [file, python]
+        fail_fast: true
+        pass_filenames: true
+        stages: [commit]     # Ensures it only runs during the commit stage

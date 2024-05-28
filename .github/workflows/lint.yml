@@ -1,0 +1,39 @@
+name: Lint Python Code
+
+on:
+  pull_request:
+    branches:
+      - main  # Adjust this to the branch you want to protect
+
+jobs:
+  pylint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10.4'  # Specify the Python version you use
+
+    - name: Set up venv
+      run: |
+        python -m venv venv --system-site-packages
+        source venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run pylint
+      id: pylint
+      continue-on-error: true
+      run: |
+        source venv/bin/activate
+
+        pylint $(find . -name "*.py") --rcfile=.pylintrc -f json2 > pylint_report.txt
+        cat pylint_report.txt | python  ./hooks/pylint_hook.py
+        res=$?
+        if [ $res == 0 ]; then
+            echo "All pylint scores are 10"
+        fi
