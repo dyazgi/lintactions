@@ -1,0 +1,38 @@
+name: Lint Python Code
+
+on:
+  pull_request:
+    branches:
+      - develop  # Adjust this to the branch you want to protect
+  push:
+    branches:
+      - develop
+
+jobs:
+  pylint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10.4'  # Specify the Python version you use
+
+    - name: Set up venv
+      run: |
+        python -m venv venv --system-site-packages
+        source venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Linting
+      id: linting
+      continue-on-error: false
+      run: |
+        set -e
+        echo "starting linting stage"
+        source venv/bin/activate
+        ./hooks/linting_hook.sh
