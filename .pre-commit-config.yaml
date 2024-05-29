@@ -12,9 +12,9 @@ repos:
         stages: [commit]
 -   repo: local
     hooks:
-      - id: pylint-hook
-        name: pylint-hook
-        entry: ./hooks/pylint_hook.sh
+      - id: linting-hook
+        name: linting-hook
+        entry: ./hooks/linting_hook.sh
         language: script
         types: [file, python]
         fail_fast: true

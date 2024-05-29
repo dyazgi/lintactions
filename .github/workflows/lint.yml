@@ -28,14 +28,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run pylint
-      id: pylint
+    - name: Run Linting
+      id: linting
       continue-on-error: false
       run: |
         set -e
-        echo "starting this stage Pylint Stage"
+        echo "starting linting stage"
         source venv/bin/activate
-        pwd
-        ls -l
-        pylint --recursive=y  . -f json2 --rcfile=.pylintrc > pylint_report.json
-        python ./hooks/pylint_hook.py  --json-file pylint_report.json
+        ./hooks/linting_hook.sh

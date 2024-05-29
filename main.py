@@ -1,4 +1,5 @@
-"""
+"""The entry script.
+
 Author: Daniel Yazgi
 Date: 2024-05-28
 """
@@ -12,6 +13,7 @@ class Greeter:
     """Class to handle greeting operations."""
 
     def __init__(self, name):
+        """This function."""
         self.name = name
 
     def greet(self):
@@ -29,5 +31,4 @@ def main():
         print(f"Error: {err}")
 
 if __name__ == "__main__":
-    # this is a minor change
     main()

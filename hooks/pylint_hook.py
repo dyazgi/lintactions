@@ -1,19 +1,23 @@
-"""
+"""Pylint hook.
+
 Author: Daniel Yazgi
 Date: 2024-05-28
+This file is note necessay for now but may be latter since we can get leting statistics.
 """
 
-import sys
-import json
 import argparse
+import json
+import sys
+
 
 def main():
-
+    """Main hook function."""
     parser = argparse.ArgumentParser(description="Print colored messages.")
-    parser.add_argument('--json-file', dest="json_file" ,type=str, help='Input Json file if not it reads from stdin')
+    parser.add_argument("--json-file", dest="json_file" ,type=str,
+    help="Input Json file if not it reads from stdin")
     args = parser.parse_args()
     if args.json_file:
-        with open(args.json_file, 'r', encoding="utf8") as file:
+        with open(args.json_file, "r", encoding="utf8") as file:
             input_data = file.read()
     else:
         # Read JSON content from stdin

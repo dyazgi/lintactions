@@ -1,46 +1,39 @@
 # lintactions
-A sample code to show how to use pylint, pre-coomit hooks and Github actions for linting python code.
+A sample code to show how to use pylint, pre-commit hooks and Github actions for linting python code.
 
-## Pylint
-below is steps to use pylint and pre-commit hooks
-1- First, run this piece of code. You can set the project name directly but for security reason I do it this way
+## Setup
+- [Mulixina](./doc/miluxina_setup.md)
+- [Freja](./doc/freja_setup.md)
 
+
+## Linting commands
+One can either use pylint or ruff commads.
+Copy the content of *fails.txt* to *main.py*
+
+### Run Pylint
+To run pylint:
 ```bash
-partition=cpu # cpu or gpu
-project=$(groups | xargs -n1 | grep 177)
-salloc  -A ${project} -p ${partition} -q default  -t 1:00:00
+pylint *.py # this will fail
 ```
-
-2- In the compute node:
-```bash
-module load env/release/2022.1
-module load Python/3.10.4-GCCcore-11.3.0-bare
-module load Ninja/1.10.2-GCCcore-11.3.0
-module load NVHPC/22.7-CUDA-11.7.0
-
-python --version # Python 3.10.4
-python -m venv venv --system-site-packages
-source ./venv/bin/activate
-pip install -r requirements.txt --upgrade pip
-```
-3- Run pylint
-```bash
-pylint *.py # this will pass
-```
-4- Make it fails: Copy the content of *fails.txt* to *main.py* and then run
+Make it fails: Copy the content of *passes.txt* to *main.py* and then run
 ```bash
 pylint *.py # This will give score less than 10.
 ```
-The only change is:
-```python
-# Before
-    except ValueError as err:
-        print(f"Error: {err}")
-# After
-    except ValueError as e:
-        print(f"Error: {e}"
+The only change is the module docstring was removed. We can modify all linting options in *.pylintrc* file for pylint.
+
+
+### Run Ruff
+To run ruff:
+```bash
+ruff check *.py # this will pass
 ```
-We can modify all linting options in *.pylintrc* file.
+4- Make it fails: Copy the content of *fails.txt* to *main.py* and then run
+```bash
+ruff check *.py
+```
+The only change is the module docstring was removed. We can modify all linting options in *pyproject.toml* file for ruff.
+
+
 
 
 ## Pre-Commit
@@ -49,10 +42,10 @@ Install pre-commit to .git each time you clone the repository:
 pre-commit install # now pre-commit will run automatically on git commit!
 ```
 Check the content of *.pre-commit-config.yaml*. The defines hooks will run pre-commit.
-Three of them come from remote repositories and the third *pylint-hook* is a local hook that runs the file *hook/pylint_hook.py*.
-*pylint_hook* is so strict but can be modified to be more torellant, it is our choice.
+Three of them come from remote repositories and the third *linting-hook* is a local hook that runs the file *hook/linting_hook.py*.
 
-Copy the content of *passes.txt* to *main.py* then
+To choose ruff7pylint in the linting_hook, create7modify a file names *linter* and set its value either to **ruff** to use ruff or to **pylint** for pylint.
+Then, copy the content of *passes.txt* to *main.py* then
 ```bash
 git add main.py
 pre-commit run # this will pass
@@ -65,7 +58,7 @@ pre-commit run  # this will fail
 ```
 
 Fix the code and then
-```bash.
+```bash
 git add . # again
 pre-commit run  # this will pass
 ```
@@ -75,3 +68,5 @@ Now commit and push the code
 git commit -m "some message"
 ```
 you will see that an action in github actions started to run please check the log in Actions
+
+## Github Actions
