@@ -8,8 +8,9 @@ linter=$(cat linter)
 echo $linter
 set -e
 echo $@
+
 if [ "x$linter" == "xpylint" ]; then
-   pylint $@ --rcfile=.pylintrc
+   pylint $@ --recurisve --rcfile=.pylintrc
    exit $?
 fi
 
