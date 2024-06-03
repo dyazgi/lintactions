@@ -10,7 +10,7 @@ set -e
 echo $@
 
 if [ "x$linter" == "xpylint" ]; then
-   pylint $@ --recursive  --rcfile=.pylintrc
+   pylint $@ --recursive y  --rcfile=.pylintrc
    exit $?
 fi
 
