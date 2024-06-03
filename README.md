@@ -17,7 +17,7 @@ pylint *.py # this will fail
 ```
 Make it fails: Copy the content of *passes.txt* to *main.py* and then run
 ```bash
-pylint *.py # This will give score less than 10.
+pylint *.py # This will give a score less than 10.
 ```
 The only change is the module docstring was removed. We can modify all linting options in *.pylintrc* file for pylint.
 
@@ -70,3 +70,4 @@ git commit -m "some message"
 you will see that an action in github actions started to run please check the log in Actions
 
 ## Github Actions
+We add a *lint.yml* file to run the linting after a push and on pull request for the main branch

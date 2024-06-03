@@ -4,12 +4,14 @@ on:
   pull_request:
     branches:
       - main  # Adjust this to the branch you want to protect
+      - develop
   push:
     branches:
       - main
+      - develop
 
 jobs:
-  pylint:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,4 +37,4 @@ jobs:
         set -e
         echo "starting linting stage"
         source venv/bin/activate
-        ./hooks/linting_hook.sh
+        ./hooks/linting_hook.sh ruff
