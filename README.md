@@ -1,5 +1,5 @@
-# torchtainer
-A prototype Apptainer container with PyTorch and other common dependencies installed to be run on HPC facilties.
+# python-project-template
+A a Template with pre-commit actions and ruff linting and some default configurations
 
 
 ## Setup
