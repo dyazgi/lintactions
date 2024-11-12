@@ -84,6 +84,7 @@
   profile = "black"
 
 [tool.ruff]
+  src = ["src", "test"]
   lint.ignore = [
     "C901",
     "D105",
