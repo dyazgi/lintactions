@@ -6,6 +6,8 @@ A prototype Apptainer container with PyTorch and other common dependencies insta
 ### Development Environment
 - [Mulixina](./doc/miluxina_setup.md)
 - [Freja](./doc/freja_setup.md)
+- More can be added
+
 Install  python venv and packages
 ```bash
 ./scripts/setup_venv_freja.sh
