@@ -5,18 +5,18 @@ repos:
     rev: v2.3.0
     hooks:
     -   id: check-yaml
-        stages: [commit]
+        stages: [pre-commit]
     -   id: end-of-file-fixer
-        stages: [commit]
+        stages: [pre-commit]
     -   id: trailing-whitespace
-        stages: [commit]
+        stages: [pre-commit]
 -   repo: local
     hooks:
       - id: linting-hook
         name: linting-hook
         entry: ./hooks/linting_hook.sh
         language: script
-        types: [file, python]
+        types: [python, yaml, toml]
         fail_fast: true
         pass_filenames: true
-        stages: [commit]     # Ensures it only runs during the commit stage
+        stages: [pre-commit]     # Ensures it only runs during the commit stage

@@ -96,8 +96,9 @@
     "RET504",
     "RUF012",
     "T201", # print found
+    "D107", "D101", "D100" # docstring
   ]
-  line-length = 90
+  line-length = 120
   lint.select = [
     "A",
     "ARG",

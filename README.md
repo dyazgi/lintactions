@@ -1,42 +1,19 @@
-# lintactions
-A sample code to show how to use pylint, pre-commit hooks and Github actions for linting python code.
+# torchtainer
+A prototype Apptainer container with PyTorch and other common dependencies installed to be run on HPC facilties.
+
 
 ## Setup
+### Development Environment
 - [Mulixina](./doc/miluxina_setup.md)
 - [Freja](./doc/freja_setup.md)
-
-
-## Linting commands
-One can either use pylint or ruff commads.
-Copy the content of *fails.txt* to *main.py*
-
-### Run Pylint
-To run pylint:
+Install  python venv and packages
 ```bash
-pylint *.py # this will fail
+./scripts/setup_venv_freja.sh
+source venv/bin/activate
 ```
-Make it fails: Copy the content of *passes.txt* to *main.py* and then run
-```bash
-pylint *.py # This will give a score less than 10.
-```
-The only change is the module docstring was removed. We can modify all linting options in *.pylintrc* file for pylint.
 
 
-### Run Ruff
-To run ruff:
-```bash
-ruff check *.py # this will pass
-```
-4- Make it fails: Copy the content of *fails.txt* to *main.py* and then run
-```bash
-ruff check *.py
-```
-The only change is the module docstring was removed. We can modify all linting options in *pyproject.toml* file for ruff.
-
-
-
-
-## Pre-Commit
+### Pre-Commit
 Install pre-commit to .git each time you clone the repository:
 ```bash
 pre-commit install # now pre-commit will run automatically on git commit!
@@ -44,30 +21,15 @@ pre-commit install # now pre-commit will run automatically on git commit!
 Check the content of *.pre-commit-config.yaml*. The defines hooks will run pre-commit.
 Three of them come from remote repositories and the third *linting-hook* is a local hook that runs the file *hook/linting_hook.py*.
 
-To choose ruff7pylint in the linting_hook, create7modify a file names *linter* and set its value either to **ruff** to use ruff or to **pylint** for pylint.
-Then, copy the content of *passes.txt* to *main.py* then
+## How to
+1- write the suitable sysyem  config file similar to *config/miluxina.sh*
+2- lin kthe file
 ```bash
-git add main.py
-pre-commit run # this will pass
+ln -sf facilities/meluxina.sh  cli.sh
+chmod +x cli.sh
 ```
 
-Now, copy content of *failes.txt* to *main.py* and run
+1- python venv and dependencies
 ```bash
-git add main.py # again
-pre-commit run  # this will fail
+sbatch ./cli.sh  prep_venv
 ```
-
-Fix the code and then
-```bash
-git add . # again
-pre-commit run  # this will pass
-```
-
-Now commit and push the code
-```bash
-git commit -m "some message"
-```
-you will see that an action in github actions started to run please check the log in Actions
-
-## Github Actions
-We add a *lint.yml* file to run the linting after a push and on pull request for the main branch
